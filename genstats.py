@@ -45,7 +45,7 @@ def readData(fn):
 				remaining[d[3]] -= int(d[1])
 		yield (curDate, remaining.copy())
 
-RIRS = ['apnic', 'ripencc', 'arin', 'afrinic', 'lacnic']
+RIRS = ['apnic', 'ripencc', 'arin', 'lacnic', 'afrinic']
 
 COLORS = {
 	'ripencc': 'blue',
