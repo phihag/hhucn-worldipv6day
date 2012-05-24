@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from __future__ import division
 import collections
@@ -44,6 +45,8 @@ def readData(fn):
 				remaining[d[3]] -= int(d[1])
 		yield (curDate, remaining.copy())
 
+RIRS = ['apnic', 'ripencc', 'arin', 'afrinic', 'lacnic']
+
 COLORS = {
 	'ripencc': 'blue',
 	'apnic': 'green',
@@ -52,14 +55,27 @@ COLORS = {
 	'lacnic': 'orange',
 }
 
+NAMES = {
+	'ripencc': 'Europa',
+	'apnic': 'Asien',
+	'arin': 'USA',
+	'afrinic': 'Afrika',
+	'lacnic': 'S.Amerika',
+}
+
 def main():
 	data = list(readData('prefixes.txt'))
-	rirs = sorted(data[0][1].keys())
+	rirs = RIRS
+
+	font = {'family' : 'normal',
+			'weight' : 'bold',
+			'size'   : 18}
+	matplotlib.rc('font', **font)
 
 	fig = plt.figure()
 	ax = fig.add_subplot(111)
 	for rir in rirs:
-		ax.plot([d[0] for d in data], [d[1][rir] for d in data], COLORS[rir])
+		ax.plot([d[0] for d in data], [d[1][rir] for d in data], COLORS[rir], label=NAMES[rir], linewidth=3)
 
 	# format the ticks
 	ax.xaxis.set_major_locator(years)
@@ -80,7 +96,9 @@ def main():
 	# axes up to make room for them
 	fig.autofmt_xdate()
 
-	plt.show()
+	plt.legend(loc=1)
+	plt.subplots_adjust(left=0.1, right=0.97, top=0.97, bottom=0.1)
+	plt.savefig('remaining.svg')
 
 
 if __name__ == '__main__':
