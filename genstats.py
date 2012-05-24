@@ -75,7 +75,7 @@ def main():
 	fig = plt.figure()
 	ax = fig.add_subplot(111)
 	for rir in rirs:
-		ax.plot([d[0] for d in data], [d[1][rir] for d in data], COLORS[rir], label=NAMES[rir], linewidth=3)
+		ax.plot([d[0] for d in data], [d[1][rir] for d in data], COLORS[rir], label=NAMES[rir], linewidth=3.5)
 
 	# format the ticks
 	ax.xaxis.set_major_locator(years)
@@ -96,8 +96,10 @@ def main():
 	# axes up to make room for them
 	fig.autofmt_xdate()
 
+	#plt.ylabel('Freie IPv4-Adressen (Millionen)')
+	plt.title('Freie IPv4-Adressen (Millionen)')
 	plt.legend(loc=1)
-	plt.subplots_adjust(left=0.1, right=0.97, top=0.97, bottom=0.1)
+	plt.subplots_adjust(left=0.1, right=0.97, top=0.92, bottom=0.1)
 	plt.savefig('remaining.svg')
 
 
