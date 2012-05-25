@@ -83,8 +83,8 @@ def main():
 	ax.xaxis.set_minor_locator(months)
 	ax.yaxis.set_major_formatter(formatter)
 
-	datemin = datetime.date(2009, 1, 1)
-	datemax = datetime.datetime.now().date()
+	datemin = datetime.date(2009, 5, 24)
+	datemax = datetime.date(2012, 5, 24)
 	ax.set_xlim(datemin, datemax)
 	ax.set_ylim(0, 350 * 1e6)
 
